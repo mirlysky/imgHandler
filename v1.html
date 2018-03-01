@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>canvas</title>
+</head>
+<body>
+	<canvas  id="canvas1" width="10" height="10" style="border:1px solid #000"></canvas>
+    <img id="img1" src="img/8.png" style="display:none">
+	<!-- <img id="img1" src="img/test.jpg" style="display:none"> -->
+    <div>
+        <button id="revert">反色</button>
+        <button id="gray">灰度</button>        
+        <button id="light">加亮</button>        
+        <button id="cross">矩阵</button>        
+        <button id="horizonFilter">横向滤波</button>        
+        <button id="verticalFilter">纵向滤波</button>        
+        <button id="filter">滤波合并</button>        
+        <button id="noise">降噪</button>        
+        <button id="remove">去除孤独点</button>        
+    </div>
+</body>
+<script>
+    window.audio = document.getElementById('audio');
+
+    function play(){
+        audio.play();
+    }
+
+    function pause(){
+        audio.pause();
+    }
+
+    function changeTime(e){
+        audio.currentTime = e.target.value;
+    }   
+
+    function ding(){
+        audio.currentTime = 50;
+        audio.play();
+        setTimeout(()=>{
+            audio.pause();
+        },3000);
+    }
+</script>
+<script src='js/v1.js'></script>
+</html>

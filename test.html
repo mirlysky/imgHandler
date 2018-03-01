@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+  <button id="btn1">test</button>
+</body>
+<script>
+  let btn = document.querySelector('#btn1');
+ 
+  // btn.addEventListener('click',once((b)=>{
+  //   b('1')
+  // }));   
+
+  // btn.addEventListener('click',wait(()=>{
+  //   console.log('1');    
+  // },500));   
+
+  // btn.addEventListener('click',continuous(getJSON)); 
+
+  function b(a){
+    console.log(a);
+  }
+
+  //模拟一个异步函数，该函数会在1s后成功
+  function getJSON(){
+    return new Promise((resolve,reject)=>{
+      setTimeout(()=>{
+        resolve();
+      },1000);
+    })
+  }
+
+  //函数只执行一次
+  function once(fn){
+    let ret;
+    return () => {
+      if(fn){
+        ret = fn.apply(this);
+      }     
+      fn = null;
+      return ret; 
+    }
+  }
+
+  //wait时间内函数只执行一次
+  function wait(fn,wait){
+    var timer;
+    return () => {
+      if(!timer){
+        timer = setTimeout(()=>{
+          timer = null;
+        },wait);
+        fn();
+      }
+    }
+  }
+
+  //异步成功后才能再次执行
+  // function continuous(...functors){
+  //   return async function(input){
+  //     // return await functors.reduce(reducer, input)
+  //   }
+  // }
+
+  function Person(name){
+    this.name = name
+  }
+  Person.prototype.getName = function(){
+    console.log(this.name);
+  }
+
+  // var name = 'window';
+  var obj = {
+    names : 'obj',
+    getName : () => {
+      var self = this;
+      return () => {
+        return self.names;
+      }
+    }
+  }
+
+  console.log(obj.getName()(),'1');
+</script>
+</html>
